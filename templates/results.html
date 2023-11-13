@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}
+    Yechganlar - {{test.title}}
+{% endblock title %}
+{% block content %}
+    <div class="card mt-3">
+        <div class="card-header p-3">
+            <h3>Yechganlar - {{test.title}}</h3>
+        </div>
+        <div class="card-body p-3">
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Student</th>
+                    <th scope="col">Sana</th>
+                    <th scope="col">To'g'ri javoblar</th>
+                    <th scope="col">Foiz</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for checktest in checktests  %}
+                    <tr {% if checktest.is_passed %} class="table-success" {% else %} class="table-danger" {% endif %} >
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{checktest.student.get_full_name}}</td>
+                        <td>{{checktest.date}}</td>
+                        <td>{{checktest.true_answers}}</td>
+                        <td>{{checktest.percentage}} %</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+{% endblock content %}

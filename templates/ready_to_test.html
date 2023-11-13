@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+   Testni Boshlash - {{test.title}}
+{% endblock title %}
+
+{% block content %}
+    <div class="card mt-5">
+        <div class="card-header">
+            <h3>Testni Boshlash - {{test.title}}</h3>
+        </div>
+        <div class="card-body">
+           <p> Kategoriya: {{test.category}} </p>
+           <p> Boshlanish sanasi: {{test.start_date}} </p>
+           <p> Tugash Sanasi: {{test.end_date}} </p>
+           <p> Maksimum harakatlar: {{test.maximum_attemps}} </p>
+           <p> Savollar soni: {{test.questions.all.count}} </p>
+           <p> Avtor: <a href="{% url 'profile' test.author.username %}">{{test.author.username}}</a> </p>
+
+           <a href="{% url 'test' test.id %}" class="btn btn-primary" >Testni boshlash</a>
+           <a href="/" class="btn btn-warning" > Qaytish </a>
+        </div>
+    </div>
+ 
+{% endblock content %}

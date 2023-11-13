@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+   {{test.title}} - ga savol qo'shish
+{% endblock title %}
+
+{% block content %}
+    <div class="card mt-5">
+        <div class="card-header">
+            <h3>{{test.title}} - ga savol qo'shish</h3>
+        </div>
+        <div class="card-body">
+            <form  method="post">
+                {% csrf_token %}
+                {{form|crispy}}
+                <button class="btn btn-primary " type="submit">Submit</button>
+                    <input checked name="add-again" class="form-check-input" type="checkbox"  id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Add again
+                    </label>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

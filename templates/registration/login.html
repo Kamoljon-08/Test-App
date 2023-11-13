@@ -1,0 +1,18 @@
+{% extends "users/base.html" %}
+{% block title %}
+    Tizimga kirish
+{% endblock title %}
+{% block content %}
+<div class="card mt-5">
+    <div class="card-header">
+        Tizimga kirish
+    </div>
+    <form method="post"> {% csrf_token %}
+        <div class="card-body">
+            <div class="mb-3 row">
+               {{form.as_p}} 
+              <button type="submit" class="btn btn-primary" >Tizimga Kirish</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}
+    Profile - {{user.first_name}}
+{% endblock title %}
+
+{% block content %}
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card p-2">
+                <center>
+                    <img style="width: 200px; height:200px; border-radius:50%" class="img-rounded m-3" src="{{user.profile.picture.url}}" alt="">
+                    <h3> {{user.get_full_name}} </h3>   
+                </center>
+                <p class="text-muted" > {{user.email}}  </p>
+                <p>Bio: {{user.profile.bio}}</p>
+                <div class="card p-2">
+                    <h5> Yechilgan testlar: {{number_of_checktests}} </h5>
+                    <hr>
+                    <h5> Yaratilgan testlar: {{number_of_tests}} </h5>
+                </div>
+                {% if user == request.user %}
+                    <a class="btn btn-warning mt-2" href="{% url 'update'  %}">Tahrirlash</a>
+                {% endif %}
+                
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Mening Natijalarim</h3>
+                </div>
+                <div class="card-body">
+                    <ol class="list-group list-group">
+                        {% for test in tests %}
+                        
+                            <a style="text-decoration: none;" data-bs-toggle="collapse" href="#collapse{{test.id}}" role="button" aria-expanded="false" aria-controls="collapse{{test.id}}">
+                                <li class="list-group-item">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">{{test.title}}</div>
+                                        {{test.category.name}}
+                                    </div>
+                                </li>
+                            </a>
+                          <div class="collapse" id="collapse{{test.id}}">
+                            <div class="card card-body">
+                                <ul class="list-group">
+                                    {% for checktest in test.checktests.all  %}
+                                        <a style="text-decoration: none;" href="{% url 'check_test' checktest.id %}">
+                                            {% if checktest.is_passed %}
+                                            <li style="background-color: rgba(40, 128, 16, 0.499);" class="list-group-item"><b>Sana:</b> {{checktest.date}} |  <b>Foiz:</b> {{checktest.percentage}} %
+                                            </li>
+                                            {% else %}
+                                            <li style="background-color: rgba(255, 0, 0, 0.37);" class="list-group-item"><b>Sana:</b> {{checktest.date}} |  <b>Foiz:</b> {{checktest.percentage}} %
+                                            </li>
+                                            {% endif %}
+                                        </a>
+                                    {% endfor %}
+                                    
+                                  </ul>
+                            </div>
+                          </div>
+                        {% endfor %}
+                      </ol>
+                      <a href="/" class="btn btn-warning mt-2" >Chiqish</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+{% endblock content %}

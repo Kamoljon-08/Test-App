@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}
+    Test - {{test.title}}
+{% endblock title %}
+
+{% block content %}
+    <div class="card mt-3">
+        <div class="card-header">
+            Test - {{test.title}}
+        </div>
+        <div class="card-body">
+            <form  method="post">
+                {% csrf_token %}
+                {% for question in test.questions.all  %}
+                <p> {{forloop.counter}}. {{question.question}} </p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{question.id}}" value="a" id="{{question.id}}_a">
+                    <label class="form-check-label" for="{{question.id}}_a">
+                        {{question.answer_a}}
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{question.id}}" value="b" id="{{question.id}}_b" >
+                    <label class="form-check-label" for="{{question.id}}_b">
+                        {{question.answer_b}}
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{question.id}}" value="c" id="{{question.id}}_c" >
+                    <label class="form-check-label" for="{{question.id}}_c">
+                        {{question.answer_d}}
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{question.id}}" value="d" id="{{question.id}}_d"  >
+                    <label class="form-check-label" for="{{question.id}}_d">
+                        {{question.answer_c}}
+                    </label>
+                </div>
+                <hr>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary" >Tugatish</button>
+            </form>
+
+        </div>
+    </div>
+{% endblock content %}

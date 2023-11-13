@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Update Test - {{test.title}}
+{% endblock title %}
+
+{% block content %}
+    <div class="card mt-5">
+        <div class="card-header">
+            <h3>Update Test - {{test.title}}</h3>
+        </div>
+        <div class="card-body">
+            <form  method="post">
+                {% csrf_token %}
+                {{form|crispy}}
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

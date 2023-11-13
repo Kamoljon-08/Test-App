@@ -1,0 +1,20 @@
+{% extends "users/base.html" %}
+
+{% block title %}
+    Tizimda chiqish
+{% endblock title %}
+
+{% block content %}
+<div class="card mt-5">
+    <div class="card-header">
+        Tizimdan chiqish
+    </div>
+    <form method="post"> {% csrf_token %}
+        <div class="card-body">
+               <p> Siz haqiqatdan ham tizimdan chiqib ketishni xohlaysizmi? </p> 
+              <button type="submit" class="btn btn-danger" >Chiqish</button>
+              <a class="btn btn-primary" href="{% url 'index' %}">Bosh sahifaga qaytish</a>
+        </div>
+    </form>
+</div>
+{% endblock content %}
